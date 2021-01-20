@@ -16,6 +16,10 @@ import nl.prolector.cursus.java.io.streams.opdrachten.bank.RekeningenType;
 
 public class SqlDao implements BankDAO {
 	
+	private void helloMichael() {
+		System.out.println("helloMichael");
+	}
+	
 	private Connection create() throws SQLException {
 		Properties props = SqlDao.getProperties();
 		String url = props.getProperty("url");
