@@ -14,7 +14,7 @@ public class TextFileDAO implements BankDAO {
 	@Override
 	public boolean add(Bank obj) {
 		boolean succesfull = true;
-		try (PrintWriter aPrintWrit = new PrintWriter(obj.getNaam() + ".txt");) {
+		try (PrintWriter aPrintWrit = new PrintWriter(TextFileDAO.convertToFileName(obj.getNaam()));) {
 
 			for (Bankrekening<?> rec : obj) {
 
@@ -32,6 +32,7 @@ public class TextFileDAO implements BankDAO {
 
 		} catch (FileNotFoundException e) {
 			succesfull = false;
+			e.printStackTrace();
 		}
 		return succesfull;
 	}
@@ -89,6 +90,8 @@ public class TextFileDAO implements BankDAO {
 
 		} catch (Exception e) {
 			aBank = null;
+			e.printStackTrace();
+			System.out.println("readen ging fout");
 		}
 
 		return Optional.ofNullable(aBank);
@@ -96,7 +99,8 @@ public class TextFileDAO implements BankDAO {
 	}
 	
 	private static String convertToFileName(String bankNaam) {
-		StringBuilder fileName = new StringBuilder(bankNaam);
+		StringBuilder fileName = new StringBuilder("target/");
+		fileName.append(bankNaam);
 		fileName.append(".txt");
 		return fileName.toString();
 	}
