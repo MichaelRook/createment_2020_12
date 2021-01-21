@@ -251,9 +251,7 @@
 					<doclint>none</doclint>
 
 					<show>package</show>
-					<release>${maven.compiler.target}</release>
 					<source>${maven.compiler.source}</source>
-					<additionalOptions>--enable-preview</additionalOptions>
 					<linksource>true</linksource>
 					<failOnError>false</failOnError>
 				</configuration>
@@ -514,9 +512,7 @@
 					<encoding>${project.build.sourceEncoding}</encoding>
 					<doclint>none</doclint>
 					<show>package</show>
-					<release>${maven.compiler.target}</release>
 					<source>${maven.compiler.source}</source>
-					<additionalOptions>--enable-preview</additionalOptions>
 					<linksource>true</linksource>
 					<failOnError>false</failOnError>
 				</configuration>
