@@ -2,6 +2,7 @@
 /bin/
 *.bin
 *.log
+*.txt
 .classpath
 .project
 .wtpmodules
