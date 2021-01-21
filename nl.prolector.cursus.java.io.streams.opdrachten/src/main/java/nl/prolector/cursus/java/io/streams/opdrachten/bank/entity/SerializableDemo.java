@@ -17,11 +17,11 @@ public class SerializableDemo {
 		triodos.openSpaarRekening("Rol", 10000.0);
 		
 		
-		try(ObjectOutputStream newOutputStream = new ObjectOutputStream(new FileOutputStream("triodos.txt"));){
+		try(ObjectOutputStream newOutputStream = new ObjectOutputStream(new FileOutputStream("triodos.bin"));){
 			newOutputStream.writeObject(triodos);
 		}
 		
-		try(ObjectInputStream newInputStream = new ObjectInputStream(new FileInputStream("triodos.txt"));){
+		try(ObjectInputStream newInputStream = new ObjectInputStream(new FileInputStream("triodos.bin"));){
 			Bank aBank = (Bank) newInputStream.readObject();
 			System.out.println(aBank.getNaam());
 			System.out.println(aBank.openRekeningCourant("jos", 1.0));
