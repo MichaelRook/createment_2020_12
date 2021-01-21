@@ -129,7 +129,7 @@ public class SqlDao implements BankDAO {
 
 	public static void main(String[] args) {
 		BankDAO aDao = new SqlDao();
-		Bank abnAmro = new Bank("Harry7");
+		Bank abnAmro = new Bank("Har7");
 		abnAmro.openRekeningCourant("sam", 10);
 		abnAmro.openRekeningCourant("clover", 10.0);
 		abnAmro.openSpaarRekening("steve", 29.0d);
