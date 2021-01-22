@@ -49,7 +49,8 @@ public class BinFileDAO implements BankDAO {
 	}
 	
 	private static String convertToFileName(String bankNaam) {
-		StringBuilder fileName = new StringBuilder(bankNaam);
+		StringBuilder fileName = new StringBuilder("target/");
+		fileName.append(bankNaam);
 		fileName.append(".bin");
 		return fileName.toString();
 	}

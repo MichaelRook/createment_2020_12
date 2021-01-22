@@ -20,7 +20,7 @@ public class Harry {
 		Bank rabobank = new Bank("Rabobank");
 		rabobank.openRekeningCourant("Maarten", 0.01);
 		rabobank.openRekeningCourant("Michael", 10000.0);
-		rabobank.openSpaarRekening("Roel", 100000000000000000000.0);
+		rabobank.openSpaarRekening("Roel", 10000000000.0);
 		
 		BankDAO dao = new BinFileDAO();
 		dao.add(rabobank);
