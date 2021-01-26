@@ -175,6 +175,7 @@ public class JsonDao implements BankDAO {
 			for(AbstractBankrekeningEntity<?> entry : theBank) {
 				System.out.println(entry.getHouder());
 				System.out.println(entry.getSaldo());
+				System.out.println(entry.getClass().getSimpleName());
 				System.out.println("++++++++++++++++++++");
 			}
 		}else {
