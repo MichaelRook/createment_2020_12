@@ -11,8 +11,8 @@ import java.sql.Statement;
 import java.util.Optional;
 import java.util.Properties;
 
-import nl.prolector.cursus.java.io.streams.opdrachten.bank.BankRekeningMemento;
-import nl.prolector.cursus.java.io.streams.opdrachten.bank.RekeningenType;
+import nl.prolector.cursus.java.io.streams.opdrachten.bank.vo.BankRekeningMemento;
+import nl.prolector.cursus.java.io.streams.opdrachten.bank.vo.RekeningenType;
 
 public class SqlDao implements BankDAO {
 	
@@ -29,7 +29,7 @@ public class SqlDao implements BankDAO {
 	};
 
 	@Override
-	public boolean add(Bank obj) {
+	public boolean add(BankEntity obj) {
 
 		boolean isAdded;
 
@@ -44,7 +44,7 @@ public class SqlDao implements BankDAO {
 				setBank.setString(1, obj.getNaam());
 				setBank.execute();
 
-				for (Bankrekening<?> aRekening : obj) {
+				for (AbstractBankrekeningEntity<?> aRekening : obj) {
 					BankRekeningMemento aMemento = aRekening.getState();
 
 					String type = RekeningenType.fromType(aMemento.getClass()).toString();
@@ -88,17 +88,17 @@ public class SqlDao implements BankDAO {
 	}
 
 	@Override
-	public boolean modify(Bank obj) {
+	public boolean modify(BankEntity obj) {
 		return false;
 	}
 
 	@Override
-	public boolean remove(Bank obj) {
+	public boolean remove(BankEntity obj) {
 		return false;
 	}
 
 	@Override
-	public Optional<Bank> read(String aBankNaam) {
+	public Optional<BankEntity> read(String aBankNaam) {
 	
 		try (Connection conn = this.create()) {
 			String sqlBank = "SELECT Naam from Bank";
@@ -129,7 +129,7 @@ public class SqlDao implements BankDAO {
 
 	public static void main(String[] args) {
 		BankDAO aDao = new SqlDao();
-		Bank abnAmro = new Bank("Har7");
+		BankEntity abnAmro = new BankEntity("Har7");
 		abnAmro.openRekeningCourant("sam", 10);
 		abnAmro.openRekeningCourant("clover", 10.0);
 		abnAmro.openSpaarRekening("steve", 29.0d);

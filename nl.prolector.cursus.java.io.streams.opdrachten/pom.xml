@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>nl.prolector.cursus</groupId>
@@ -7,7 +8,7 @@
 	<packaging>jar</packaging>
 	<name>Casus Bank</name>
 	<description>Bla</description>
-		<properties>
+	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -20,9 +21,10 @@
 		<checkstyle.version>8.38</checkstyle.version>
 		<integration.sources>src/integration-test/java</integration.sources>
 		<integration.resources>src/integration-test/resources</integration.resources>
-        <skipTests>false</skipTests>
-        <skipUnitTests>${skipTests}</skipUnitTests>
-        <skipIntegrationTests>${skipTests}</skipIntegrationTests>		
+		<skipTests>false</skipTests>
+		<skipUnitTests>${skipTests}</skipUnitTests>
+		<skipIntegrationTests>${skipTests}</skipIntegrationTests>
+		<!--  <xjc.arguments>-XsimpleEquals -XsimpleHashCode</xjc.arguments> -->
 	</properties>
 	<dependencies>
 		<dependency>
@@ -32,30 +34,54 @@
 			<scope>runtime</scope>
 			<exclusions>
 				<exclusion>
-    				<groupId>org.checkerframework</groupId>
-    				<artifactId>checker-qual</artifactId>
+					<groupId>org.checkerframework</groupId>
+					<artifactId>checker-qual</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/javax.json/javax.json-api -->
 		<dependency>
-		    <groupId>javax.json</groupId>
-		    <artifactId>javax.json-api</artifactId>
-		    <version>1.1.4</version>
+			<groupId>javax.json</groupId>
+			<artifactId>javax.json-api</artifactId>
+			<version>1.1.4</version>
 		</dependency>
 		<dependency>
-    		<groupId>org.glassfish</groupId>
-    		<artifactId>javax.json</artifactId>
-    		<version>1.1</version>
-    		<scope>runtime</scope>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.json</artifactId>
+			<version>1.1</version>
+			<scope>runtime</scope>
 		</dependency>
-				
+
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.4.0-b180830.0359</version>
+		</dependency>
+
+
 
 
 	</dependencies>
-		<build>
+	<build>
 		<pluginManagement>
 			<plugins>
+			<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-eclipse-plugin -->
+				<plugin>
+				    <groupId>org.apache.maven.plugins</groupId>
+				    <artifactId>maven-eclipse-plugin</artifactId>
+				    <version>2.10</version>
+				</plugin>
+			
+			
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-checkstyle-plugin</artifactId>
@@ -190,20 +216,9 @@
 			</plugins>
 		</pluginManagement>
 		<plugins>
-		<!--  
-			<plugin>
-				<groupId>org.owasp</groupId>
-				<artifactId>dependency-check-maven</artifactId>
-				<version>6.0.3</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
--->
+			<!-- <plugin> <groupId>org.owasp</groupId> <artifactId>dependency-check-maven</artifactId> 
+				<version>6.0.3</version> <executions> <execution> <goals> <goal>check</goal> 
+				</goals> </execution> </executions> </plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -212,12 +227,41 @@
 					<source>${maven.compiler.source}</source>
 					<target>${maven.compiler.target}</target>
 					<encoding>UTF-8</encoding>
-					<!-- 
-					<compilerArgs>
-						<arg>- -enable-preview</arg>
-					</compilerArgs>
-					 -->
+					<!-- <compilerArgs> <arg>- -enable-preview</arg> </compilerArgs> -->
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxb2-maven-plugin</artifactId>
+				<version>2.5.0</version>
+				<executions>
+					<execution>
+						<id>xjc</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+				
+					<extension>true</extension>
+					<!-- The package of your generated sources -->
+				<!--  	<arguments>
+						<argument>-XsimpleEquals-XsimpleHashCode</argument>
+						<argument>-XsimpleHashCode</argument>
+					</arguments> -->
+					<verbose>true</verbose>
+					<packageName>nl.prolector.cursus.java.io.streams.opdrachten.bank.webservices</packageName>
+				</configuration>
+				<dependencies>
+				<!-- https://mvnrepository.com/artifact/org.jvnet.jaxb2_commons/jaxb2-basics -->
+					<dependency>
+					    <groupId>org.jvnet.jaxb2_commons</groupId>
+					    <artifactId>jaxb2-basics</artifactId>
+					    <version>1.11.1</version>
+					</dependency>
+
+				</dependencies>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -237,7 +281,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 
- 
+
 				<configuration>
 					<skipTests>${skipUnitTests}</skipTests>
 
@@ -249,10 +293,10 @@
 						<include>**/AllTests.java</include>
 					</includes>
 				</configuration>
-		
-	
-					
-				
+
+
+
+
 			</plugin>
 
 			<plugin>
@@ -288,16 +332,16 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
-	            <configuration>
-	                <skipTests>${skipIntegrationTests}</skipTests>
-	                <includes>
-		              <include>**/*IntegrationTests.java</include>
-		              <include>**/IT*.java</include>
-		              <include>**/*IT.java</include>
-		              <include>**/*ITCase.java</include>
-		            </includes>
-	                <testSourceDirectory>${integration.sources}</testSourceDirectory>
-	            </configuration>
+				<configuration>
+					<skipTests>${skipIntegrationTests}</skipTests>
+					<includes>
+						<include>**/*IntegrationTests.java</include>
+						<include>**/IT*.java</include>
+						<include>**/*IT.java</include>
+						<include>**/*ITCase.java</include>
+					</includes>
+					<testSourceDirectory>${integration.sources}</testSourceDirectory>
+				</configuration>
 				<executions>
 					<execution>
 						<id>default-integration-test</id>
@@ -305,11 +349,8 @@
 							<goal>integration-test</goal>
 							<goal>verify</goal>
 						</goals>
-						<!--  
-			            <configuration>
-			                <testSourceDirectory>${integration.sources}</testSourceDirectory>
-			            </configuration>	
-			            -->					
+						<!-- <configuration> <testSourceDirectory>${integration.sources}</testSourceDirectory> 
+							</configuration> -->
 					</execution>
 				</executions>
 
@@ -328,24 +369,24 @@
 						<configuration>
 							<sources>
 								<source>${integration.sources}</source>
-							</sources>						
+							</sources>
 						</configuration>
 					</execution>
-			          <execution>
-			            <id>add-resource</id>
-			            <phase>generate-resources</phase>
-			            <goals>
-			              <goal>add-test-resource</goal>
-			            </goals>
-			            <configuration>
-			              <resources>
-			                <resource>
-			                  <directory>${integration.resources}</directory>
-			                </resource>
-			              </resources>
-			            </configuration>
-			          </execution>
-					
+					<execution>
+						<id>add-resource</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>add-test-resource</goal>
+						</goals>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>${integration.resources}</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+
 				</executions>
 			</plugin>
 			<plugin>
@@ -354,7 +395,7 @@
 				<artifactId>spotbugs-maven-plugin</artifactId>
 
 			</plugin>
-			<plugin>
+			<!--  <plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 
@@ -366,7 +407,7 @@
 						</goals>
 						<configuration>
 
-							<!-- Sets the VM argument line used when unit tests are run. -->
+							
 							<propertyName>surefireArgLine</propertyName>
 						</configuration>
 					</execution>
@@ -414,7 +455,7 @@
 										<limit>
 											<counter>COMPLEXITY</counter>
 											<value>COVEREDRATIO</value>
-											<minimum>0.0</minimum>
+											<minimum>0.80</minimum>
 										</limit>
 									</limits>
 								</rule>
@@ -422,13 +463,73 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
-			<!-- <plugin> <groupId>org.jacoco</groupId> <artifactId>jacoco-maven-plugin</artifactId> 
-				<version>0.8.6</version> <configuration> <destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile> 
-				</configuration> <executions> <execution> <id>default-prepare-agent</id> 
-				<goals> <goal>prepare-agent</goal> </goals> </execution> <execution> <id>default-report</id> 
-				<phase>prepare-package</phase> <goals> <goal>report</goal> </goals> </execution> 
-				</executions> </plugin> -->
+			</plugin> -->
+			
+			<!--  	<plugin>
+		<groupId>org.jacoco</groupId>
+		<artifactId>jacoco-maven-plugin</artifactId>
+		<version>0.8.6</version>
+		<configuration>
+			<destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
+		</configuration>
+		<executions>
+			<execution>
+				<id>default-prepare-agent</id>
+				<goals>
+					<goal>prepare-agent</goal>
+				</goals>
+			</execution>
+			<execution>
+				<id>default-report</id>
+				<phase>prepare-package</phase>
+				<goals>
+					<goal>report</goal>
+				</goals>
+			</execution>
+		</executions>
+	</plugin> -->
+	
+	<plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.6</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>jacoco-report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>jacoco-check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <rule>
+                                    <element>PACKAGE</element>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.0</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+	
+	
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
@@ -446,7 +547,7 @@
 				</executions>
 			</plugin>
 
-			<plugin>
+			<!--  <plugin>
 				<groupId>org.pitest</groupId>
 				<artifactId>pitest-maven</artifactId>
 				<executions>
@@ -457,8 +558,8 @@
 					</execution>
 				</executions>
 
-			</plugin>
-			
+			</plugin> -->
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
@@ -467,35 +568,17 @@
 					<downloadJavadocs>true</downloadJavadocs>
 				</configuration>
 			</plugin>
-			
 
-		
+
+
 		</plugins>
 	</build>
-	<!-- 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<configuration>
-					<downloadSources>true</downloadSources>
-					<downloadJavadocs>true</downloadJavadocs>
-				</configuration>
-			</plugin>
-		</plugins>
-
-	</build>
--->
+	<!-- <build> <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+		<artifactId>maven-compiler-plugin</artifactId> <version>3.8.1</version> <configuration> 
+		<source>1.7</source> <target>1.7</target> </configuration> </plugin> <plugin> 
+		<groupId>org.apache.maven.plugins</groupId> <artifactId>maven-eclipse-plugin</artifactId> 
+		<configuration> <downloadSources>true</downloadSources> <downloadJavadocs>true</downloadJavadocs> 
+		</configuration> </plugin> </plugins> </build> -->
 	<reporting>
 		<plugins>
 			<plugin>
@@ -579,39 +662,34 @@
 				<version>${checkstyle.maven.version}</version>
 
 			</plugin>
-<!--
+			<!-- <plugin> <groupId>org.pitest</groupId> <artifactId>pitest-maven</artifactId> 
+				<version>${pitest.maven.version}</version> <reportSets> <reportSet> <reports> 
+				<report>report</report> </reports> </reportSet> </reportSets> </plugin> -->
 			<plugin>
-				<groupId>org.pitest</groupId>
-				<artifactId>pitest-maven</artifactId>
-				<version>${pitest.maven.version}</version>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>3.0.0-M5</version>
+			</plugin>
+						<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.6</version>
 				<reportSets>
 					<reportSet>
 						<reports>
+							<!-- select non-aggregate reports -->
 							<report>report</report>
 						</reports>
 					</reportSet>
 				</reportSets>
 			</plugin>
-		-->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-report-plugin</artifactId>
-				<version>3.0.0-M5</version>
-			</plugin>	
-			<!--  	
-			<plugin>
-				<groupId>org.owasp</groupId>
-				<artifactId>dependency-check-maven</artifactId>
-				<version>6.0.3</version>
-				<reportSets>
-					<reportSet>
-						<reports>
-							<report>aggregate</report>
-						</reports>
-					</reportSet>
-				</reportSets>
-			</plugin>
-			-->	
+			
+			
+			
+			
+			<!-- <plugin> <groupId>org.owasp</groupId> <artifactId>dependency-check-maven</artifactId> 
+				<version>6.0.3</version> <reportSets> <reportSet> <reports> <report>aggregate</report> 
+				</reports> </reportSet> </reportSets> </plugin> -->
 		</plugins>
 
 	</reporting>

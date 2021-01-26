@@ -6,8 +6,6 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Optional;
 
 import javax.json.Json;
@@ -21,13 +19,13 @@ import javax.json.JsonStructure;
 import javax.json.JsonValue;
 import javax.json.JsonWriter;
 
-import nl.prolector.cursus.java.io.streams.opdrachten.bank.BankRekeningMemento;
-import nl.prolector.cursus.java.io.streams.opdrachten.bank.RekeningenType;
+import nl.prolector.cursus.java.io.streams.opdrachten.bank.vo.BankRekeningMemento;
+import nl.prolector.cursus.java.io.streams.opdrachten.bank.vo.RekeningenType;
 
 public class JsonDao implements BankDAO {
 
 	@Override
-	public boolean add(Bank obj) {
+	public boolean add(BankEntity obj) {
 		// TODO Auto-generated method stub
 		boolean isAdded;
 
@@ -36,7 +34,7 @@ public class JsonDao implements BankDAO {
 
 		JsonArrayBuilder bankRekeningen = Json.createArrayBuilder();
 		
-		for (Bankrekening<?> rec : obj) {
+		for (AbstractBankrekeningEntity<?> rec : obj) {
 
 			BankRekeningMemento aMemento = rec.getState();
 
@@ -70,21 +68,21 @@ public class JsonDao implements BankDAO {
 	}
 
 	@Override
-	public boolean modify(Bank obj) {
+	public boolean modify(BankEntity obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean remove(Bank obj) {
+	public boolean remove(BankEntity obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public Optional<Bank> read(String aBankNaam) {
+	public Optional<BankEntity> read(String aBankNaam) {
 		// TODO Auto-generated method stub
-		Bank aBank;
+		BankEntity aBank;
 		
 		
 		String pathNaam = JsonDao.convertToFileName(aBankNaam);
@@ -96,12 +94,12 @@ public class JsonDao implements BankDAO {
 			 JsonObject input = aStructure.asJsonObject();
 			 
 			 String bankNaam = input.getString("naam");
-			 aBank = new Bank(bankNaam);
+			 aBank = new BankEntity(bankNaam);
 			 
 			 JsonArray bankRekeningen = input.getJsonArray("BankRekeningen");
 			 
 			 
-			 int maxRekeningNummer = Bank.EERSTE_REKENINGNR;
+			 int maxRekeningNummer = BankEntity.EERSTE_REKENINGNR;
 			 
 			 for(JsonValue entry : bankRekeningen) {
 			
@@ -112,13 +110,13 @@ public class JsonDao implements BankDAO {
 				JsonNumber saldoJson = bankRekeningDetails.getJsonNumber("Saldo");
 				Double saldo = saldoJson.doubleValue();
 				
-				Bankrekening<?> aBankRekening;
+				AbstractBankrekeningEntity<?> aBankRekening;
 				switch (RekeningenType.valueOf(soort)) {
 				case Spaar:
-					aBankRekening = new Spaarrekening(houder, saldo, rekeningNummer);
+					aBankRekening = new SpaarrekeningFactory(houder, saldo, rekeningNummer);
 					break;
 				case Courant:
-					aBankRekening = new RekeningCourant(houder, saldo, rekeningNummer);
+					aBankRekening = new RekeningCourantFactory(houder, saldo, rekeningNummer);
 					break;
 
 				default:
@@ -161,20 +159,20 @@ public class JsonDao implements BankDAO {
 	public static void main(String[] args) {
 
 		BankDAO aDao = new JsonDao();
-		Bank abnAmro = new Bank("Triodos");
+		BankEntity abnAmro = new BankEntity("Triodos");
 		abnAmro.openRekeningCourant("sam", 10);
 		abnAmro.openRekeningCourant("clover", 10.29);
 		abnAmro.openSpaarRekening("steve", 29.0d);
 
 		System.out.println(aDao.add(abnAmro));
 		
-		Optional<Bank> resultBank = aDao.read("Triodos");
+		Optional<BankEntity> resultBank = aDao.read("Triodos");
 	
 		if(resultBank.isPresent()) {
-			Bank theBank = resultBank.get();
+			BankEntity theBank = resultBank.get();
 			System.out.println(theBank.getNaam());
 			System.out.println();
-			for(Bankrekening<?> entry : theBank) {
+			for(AbstractBankrekeningEntity<?> entry : theBank) {
 				System.out.println(entry.getHouder());
 				System.out.println(entry.getSaldo());
 				System.out.println("++++++++++++++++++++");

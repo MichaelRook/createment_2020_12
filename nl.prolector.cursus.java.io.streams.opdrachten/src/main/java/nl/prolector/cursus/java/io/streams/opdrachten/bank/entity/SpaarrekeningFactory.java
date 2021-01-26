@@ -1,9 +1,8 @@
 package nl.prolector.cursus.java.io.streams.opdrachten.bank.entity;
 
-import nl.prolector.cursus.java.io.streams.opdrachten.bank.OnvoldoendeSaldoException;
-import nl.prolector.cursus.java.io.streams.opdrachten.bank.SpaarRekeningMemento;
+import nl.prolector.cursus.java.io.streams.opdrachten.bank.vo.SpaarRekeningMemento;
 
-public class Spaarrekening extends Bankrekening<SpaarRekeningMemento> {
+public class SpaarrekeningFactory extends AbstractBankrekeningEntity<SpaarRekeningMemento> {
 
 	/**
 	 * 
@@ -13,7 +12,7 @@ public class Spaarrekening extends Bankrekening<SpaarRekeningMemento> {
 	private static final double CREDIT_RENTE = 5.0;
 
 	
-	public Spaarrekening(String houder, double saldo, int rekeningnummer) {
+	public SpaarrekeningFactory(String houder, double saldo, int rekeningnummer) {
 		super(houder, saldo, rekeningnummer);
 	}
 
@@ -21,9 +20,10 @@ public class Spaarrekening extends Bankrekening<SpaarRekeningMemento> {
 	 * Voor Intern gebruik!!!
 	 * 
 	 * 
+	 * 
 	 */
 
-	Spaarrekening() {
+	SpaarrekeningFactory() {
 
 	}
 
@@ -33,11 +33,11 @@ public class Spaarrekening extends Bankrekening<SpaarRekeningMemento> {
 	}
 
 	@Override
-	public void neemOp(double bedrag) throws OnvoldoendeSaldoException {
+	public void neemOp(double bedrag) throws Exception {
 		try {
 			super.neemOp(bedrag + BOETE_RENTE * bedrag / 100.0);
-		} catch (OnvoldoendeSaldoException e) {
-			throw new OnvoldoendeSaldoException(this, e);
+		} catch (Exception e) {
+			throw new Exception();
 		}
 	}
 

@@ -1,18 +1,18 @@
 package nl.prolector.cursus.java.io.streams.opdrachten.bank.entity;
 
-import nl.prolector.cursus.java.io.streams.opdrachten.bank.CourantRekeningMemento;
+import nl.prolector.cursus.java.io.streams.opdrachten.bank.vo.CourantRekeningMemento;
 
-public class RekeningCourant extends Bankrekening<CourantRekeningMemento> {
+public class RekeningCourantFactory extends AbstractBankrekeningEntity<CourantRekeningMemento> {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	RekeningCourant() {
+	RekeningCourantFactory() {
 	}
 
-	public RekeningCourant(String houder, double saldo, int rekeningnummer) {
+	public RekeningCourantFactory(String houder, double saldo, int rekeningnummer) {
 		super(houder, saldo, rekeningnummer);
 	}
 

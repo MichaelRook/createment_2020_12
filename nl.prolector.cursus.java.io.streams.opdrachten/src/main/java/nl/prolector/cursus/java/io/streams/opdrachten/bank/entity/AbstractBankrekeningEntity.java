@@ -3,10 +3,9 @@ package nl.prolector.cursus.java.io.streams.opdrachten.bank.entity;
 import java.io.PrintWriter;
 import java.io.Serializable;
 
-import nl.prolector.cursus.java.io.streams.opdrachten.bank.BankRekeningMemento;
-import nl.prolector.cursus.java.io.streams.opdrachten.bank.OnvoldoendeSaldoException;
+import nl.prolector.cursus.java.io.streams.opdrachten.bank.vo.BankRekeningMemento;
 
-public abstract class Bankrekening<S extends BankRekeningMemento> implements Serializable {
+public abstract class AbstractBankrekeningEntity<S extends BankRekeningMemento> implements Serializable {
 
 	/**
 	 * 
@@ -17,10 +16,10 @@ public abstract class Bankrekening<S extends BankRekeningMemento> implements Ser
 	private int rekeningnummer;
 	// private static int nieuwRekeningnummer = 1000;
 
-	public Bankrekening() {
+	public AbstractBankrekeningEntity() {
 	}
 
-	public Bankrekening(String houder, double saldo, int rekeningnummer) {
+	public AbstractBankrekeningEntity(String houder, double saldo, int rekeningnummer) {
 		this.houder = houder;
 		this.saldo = saldo;
 		this.rekeningnummer = rekeningnummer;
@@ -47,7 +46,9 @@ public abstract class Bankrekening<S extends BankRekeningMemento> implements Ser
 		this.saldo += bedrag;
 	}
 
-	public void neemOp(double bedrag) throws OnvoldoendeSaldoException {
+	
+	//TODO: zorg voor fout exceptie beter. 
+	public void neemOp(double bedrag) throws Exception {
 		assert saldo > 0.0 : "Saldo is negatief";
 		if (bedrag < 0.0) {
 			throw new IllegalArgumentException("Bedrag mag niet negatief zijn");
@@ -55,10 +56,11 @@ public abstract class Bankrekening<S extends BankRekeningMemento> implements Ser
 		if (this.saldo - bedrag >= 0.0) {
 			this.saldo -= bedrag;
 		} else {
-			throw new OnvoldoendeSaldoException(this);
+			throw new Exception();
 		}
 	}
 
+	
 	public void print() {
 		System.out.printf("----------------------------------------%n");
 		System.out.printf("Naam  : %s%n", this.houder);
