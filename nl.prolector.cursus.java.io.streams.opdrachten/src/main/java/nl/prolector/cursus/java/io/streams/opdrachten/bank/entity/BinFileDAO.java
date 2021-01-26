@@ -10,7 +10,7 @@ import java.util.Optional;
 public class BinFileDAO implements BankDAO {
 
 	@Override
-	public boolean add(Bank obj) {
+	public boolean add(BankEntity obj) {
 		boolean successqfual = true;
 		String fileName = BinFileDAO.convertToFileName(obj.getNaam());
 		try(ObjectOutputStream newOutputStream = new ObjectOutputStream(new FileOutputStream(fileName));){
@@ -24,23 +24,23 @@ public class BinFileDAO implements BankDAO {
 	}
 
 	@Override
-	public boolean modify(Bank obj) {
+	public boolean modify(BankEntity obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean remove(Bank obj) {
+	public boolean remove(BankEntity obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public Optional<Bank> read(String aBankNaam) {
+	public Optional<BankEntity> read(String aBankNaam) {
 		String fileName = BinFileDAO.convertToFileName(aBankNaam);
-		Bank aBank;
+		BankEntity aBank;
 		try(ObjectInputStream newInputStream = new ObjectInputStream(new FileInputStream(fileName));){
-			aBank = (Bank) newInputStream.readObject();
+			aBank = (BankEntity) newInputStream.readObject();
 		} catch (IOException | ClassNotFoundException e) {
 			aBank = null;
 

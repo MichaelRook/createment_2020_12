@@ -6,17 +6,17 @@ import java.io.LineNumberReader;
 import java.io.PrintWriter;
 import java.util.Optional;
 
-import nl.prolector.cursus.java.io.streams.opdrachten.bank.BankRekeningMemento;
-import nl.prolector.cursus.java.io.streams.opdrachten.bank.RekeningenType;
+import nl.prolector.cursus.java.io.streams.opdrachten.bank.vo.BankRekeningMemento;
+import nl.prolector.cursus.java.io.streams.opdrachten.bank.vo.RekeningenType;
 
 public class TextFileDAO implements BankDAO {
 
 	@Override
-	public boolean add(Bank obj) {
+	public boolean add(BankEntity obj) {
 		boolean succesfull = true;
 		try (PrintWriter aPrintWrit = new PrintWriter(TextFileDAO.convertToFileName(obj.getNaam()));) {
 
-			for (Bankrekening<?> rec : obj) {
+			for (AbstractBankrekeningEntity<?> rec : obj) {
 
 				BankRekeningMemento aMemento = rec.getState();
 
@@ -38,26 +38,26 @@ public class TextFileDAO implements BankDAO {
 	}
 
 	@Override
-	public boolean modify(Bank obj) {
+	public boolean modify(BankEntity obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean remove(Bank obj) {
+	public boolean remove(BankEntity obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 	
-	public Optional<Bank> read(String aBankNaam) {
+	public Optional<BankEntity> read(String aBankNaam) {
 
-		Bank aBank;
+		BankEntity aBank;
 		String fileName = TextFileDAO.convertToFileName(aBankNaam);
 		try (LineNumberReader aLineNumberReader = new LineNumberReader(new FileReader(fileName));) {
 			String bankNaam = aLineNumberReader.readLine().trim();
-			aBank = new Bank(bankNaam);
+			aBank = new BankEntity(bankNaam);
 			String nextLine;
-			int maxRekeningNummer = Bank.EERSTE_REKENINGNR;
+			int maxRekeningNummer = BankEntity.EERSTE_REKENINGNR;
 
 			while ((nextLine = aLineNumberReader.readLine()) != null) {
 				String[] elementen = nextLine.split("\t");
@@ -67,13 +67,13 @@ public class TextFileDAO implements BankDAO {
 				int rekeningNummer = Integer.parseInt(elementen[2]);
 				double saldo = Double.parseDouble(elementen[3]);
 
-				Bankrekening<?> aBankRekening;
+				AbstractBankrekeningEntity<?> aBankRekening;
 				switch (rekeningType) {
 				case Spaar:
-					aBankRekening = new Spaarrekening(houder, saldo, rekeningNummer);
+					aBankRekening = new SpaarrekeningFactory(houder, saldo, rekeningNummer);
 					break;
 				case Courant:
-					aBankRekening = new RekeningCourant(houder, saldo, rekeningNummer);
+					aBankRekening = new RekeningCourantFactory(houder, saldo, rekeningNummer);
 					break;
 
 				default:

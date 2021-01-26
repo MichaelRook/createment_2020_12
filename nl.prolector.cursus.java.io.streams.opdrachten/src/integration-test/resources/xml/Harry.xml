@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bank xmlns="http://www.example.org/NewXMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.example.org/NewXMLSchema ../../../main/xsd/Bank.xsd ">
+	
+	<name>Harry</name>
+	
+	<spaarRekening>
+		<nummer>1200</nummer>
+		<houder>Sally</houder>
+		<saldo>80.98</saldo>
+	</spaarRekening>
+	
+	<rekeningCourant>
+		<nummer>1201</nummer>
+		<houder>Sally</houder>
+		<saldo>80.98</saldo>
+	</rekeningCourant>
+	
+	<rekeningCourant>
+		<nummer>1202</nummer>
+		<houder>Sally</houder>
+		<saldo>80.98</saldo>
+	</rekeningCourant>
+
+	
+	
+	<rekeningCourant>
+		<nummer>12012</nummer>
+		<houder>Sally</houder>
+		<saldo>80.98</saldo>
+	</rekeningCourant>
+	
+	<spaarRekening>
+		<nummer>1204</nummer>
+		<houder>Sally</houder>
+		<saldo>80.98</saldo>
+	</spaarRekening>
+	
+	
+	
+	
+</bank>

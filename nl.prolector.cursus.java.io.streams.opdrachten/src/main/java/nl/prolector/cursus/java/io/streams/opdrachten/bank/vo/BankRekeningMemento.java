@@ -1,7 +1,13 @@
-package nl.prolector.cursus.java.io.streams.opdrachten.bank;
+package nl.prolector.cursus.java.io.streams.opdrachten.bank.vo;
 
-public abstract class BankRekeningMemento {
+import java.io.Serializable;
 
+public abstract class BankRekeningMemento implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final String houder;
 	private final double saldo;
 	private final int rekeningnummer;

@@ -1,4 +1,4 @@
-package nl.prolector.cursus.java.io.streams.opdrachten.bank;
+package nl.prolector.cursus.java.io.streams.opdrachten.bank.vo;
 
 public enum RekeningenType {
 	

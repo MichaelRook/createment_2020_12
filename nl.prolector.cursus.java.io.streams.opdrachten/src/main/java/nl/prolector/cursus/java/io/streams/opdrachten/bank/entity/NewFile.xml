@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bank>
+	<naam></naam>
+	<spaarRekening>
+		<nummer></nummer>
+		<houder></houder>
+		<salo></salo>
+	</spaarRekening>
+	<rekeningCourant>
+		<nummer></nummer>
+		<houder></houder>
+		<salo></salo>
+	</rekeningCourant>
+</bank>

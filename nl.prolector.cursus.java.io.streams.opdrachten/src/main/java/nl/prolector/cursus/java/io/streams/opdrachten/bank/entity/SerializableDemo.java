@@ -11,7 +11,7 @@ public class SerializableDemo {
 
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		Bank triodos = new Bank("Triodos");
+		BankEntity triodos = new BankEntity("Triodos");
 		triodos.openRekeningCourant("Marten", 10);
 		triodos.openRekeningCourant("Michal", 5000.0);
 		triodos.openSpaarRekening("Rol", 10000.0);
@@ -22,7 +22,7 @@ public class SerializableDemo {
 		}
 		
 		try(ObjectInputStream newInputStream = new ObjectInputStream(new FileInputStream("triodos.bin"));){
-			Bank aBank = (Bank) newInputStream.readObject();
+			BankEntity aBank = (BankEntity) newInputStream.readObject();
 			System.out.println(aBank.getNaam());
 			System.out.println(aBank.openRekeningCourant("jos", 1.0));
 			

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://www.example.org/NewXMLSchema" 
+xmlns:tns="http://www.example.org/NewXMLSchema" elementFormDefault="qualified">
+	
+
+	
+<element name="bank">
+	
+	
+	
+        <complexType>
+				<sequence>
+					<element name="name" type="tns:bankNaam"></element>
+					<choice minOccurs="0" maxOccurs="unbounded">
+	           			<element name="spaarRekening" type="tns:spaarRekening" />
+	           			<element name="rekeningCourant" type="tns:rekeningCourant" />
+	         		</choice>
+				</sequence>
+	</complexType>
+        
+
+        <unique name="schemaKey">
+           <selector xpath="tns:*"></selector>
+           <field xpath="tns:nummer"></field> 
+        </unique>
+    </element>
+
+
+
+	<simpleType name="bankNaam">
+		<restriction base="string">
+			<pattern value="[A-Z][a-zA-Z\s-]{0,69}"></pattern>
+		</restriction>
+	</simpleType>
+	
+	
+	<simpleType name="persoonNaam">
+		<restriction base="string">
+			<pattern value="[A-Z][a-zA-Z\s]{0,49}"></pattern>
+		</restriction>
+	</simpleType>
+	
+	
+	<simpleType name="rekeningNummer">
+		<restriction base="integer">
+			<minInclusive value="1000"></minInclusive>
+			<totalDigits value="10"></totalDigits>
+		</restriction>
+	</simpleType>
+	
+	<simpleType name="saldoType">
+		<restriction base="decimal">
+			<minInclusive value="0"></minInclusive>
+			<totalDigits value="17"></totalDigits>
+			<fractionDigits value="2"></fractionDigits>
+		</restriction>
+	</simpleType>
+	
+	
+	
+	<complexType name="bankRekening">
+		<sequence>
+			<element name = "nummer" minOccurs="1" maxOccurs="1" type="tns:rekeningNummer"></element>
+			<element name = "houder" minOccurs="1" maxOccurs="1" type="tns:persoonNaam"></element>
+			<element name = "saldo" minOccurs="1" maxOccurs="1" type="tns:saldoType"></element>
+		</sequence>
+	</complexType>
+	
+	
+	
+	
+	<complexType name="spaarRekening">
+		<complexContent>
+			<extension base = "tns:bankRekening"/>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="rekeningCourant">
+		<complexContent>
+			<extension base = "tns:bankRekening"/>
+		</complexContent>
+	</complexType>
+	
+	
+	
+	
+	
+
+</schema>
+
