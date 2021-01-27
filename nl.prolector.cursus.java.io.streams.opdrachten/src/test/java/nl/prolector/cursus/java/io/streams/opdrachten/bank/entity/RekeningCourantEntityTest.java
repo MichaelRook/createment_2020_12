@@ -136,6 +136,26 @@ public class RekeningCourantEntityTest {
 		
 	}
 	
+	@Test
+	public void testHashCodeTrue() {
+		String naam1 = "Harry";
+		
+		RekeningCourantEntity Rekening1 = new RekeningCourantEntity("Harry", 10.0, 1001);
+		RekeningCourantEntity Rekening2 = new RekeningCourantEntity("Harry", 10.0, 1001);
+		int expected = naam1.hashCode() * 1001 * 59;
+		assertEquals(expected, Rekening1.hashCode());
+		assertEquals(Rekening1.hashCode(), Rekening2.hashCode());
+
+	}
+	
+	@Test 
+	public void testHashCodeFalse() {
+		RekeningCourantEntity Rekening1 = new RekeningCourantEntity("Harry", 10.0, 1001);
+		RekeningCourantEntity Rekening2 = new RekeningCourantEntity("Sammy", 10.0, 1002);
+		assertFalse(Rekening1.hashCode() == Rekening2.hashCode());
+
+	}
+
 
 	
 		

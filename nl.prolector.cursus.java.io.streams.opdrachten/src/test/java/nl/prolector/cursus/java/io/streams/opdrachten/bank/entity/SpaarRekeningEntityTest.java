@@ -1,6 +1,7 @@
 package nl.prolector.cursus.java.io.streams.opdrachten.bank.entity;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -156,7 +157,25 @@ public class SpaarRekeningEntityTest {
 				
 	}
 
+	@Test
+	public void testHashCodeTrue() {
+		String naam1 = "Harry";
+		
+		SpaarrekeningEntity Rekening1 = new SpaarrekeningEntity("Harry", 10.0, 1001);
+		SpaarrekeningEntity Rekening2 = new SpaarrekeningEntity("Harry", 10.0, 1001);
+		int expected = naam1.hashCode() * 1001 * 59;
+		assertEquals(expected, Rekening1.hashCode());
+		assertEquals(Rekening1.hashCode(), Rekening2.hashCode());
+
+	}
 	
+	@Test 
+	public void testHashCodeFalse() {
+		SpaarrekeningEntity Rekening1 = new SpaarrekeningEntity("Harry", 10.0, 1001);
+		SpaarrekeningEntity Rekening2 = new SpaarrekeningEntity("Sammy", 10.0, 1002);
+		assertFalse(Rekening1.hashCode() == Rekening2.hashCode());
+
+	}
 		
 		
 
