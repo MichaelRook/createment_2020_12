@@ -10,9 +10,11 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
 
 import nl.prolector.cursus.java.io.streams.opdrachten.bank.toa.BankEntity2BankWS;
 import nl.prolector.cursus.java.io.streams.opdrachten.bank.webservices.Bank;
@@ -82,6 +84,7 @@ public class XMLDao implements BankDAO {
 	@Override
 	public Optional<BankEntity> read(String aBankNaam) {
 		
+
 		BankEntity bankEntity;
 		
 		try {
@@ -155,6 +158,8 @@ public class XMLDao implements BankDAO {
 		}
 		
 		return Optional.ofNullable(bankEntity);
+
+
 	}
 
 	public static void main(String[] args) {
