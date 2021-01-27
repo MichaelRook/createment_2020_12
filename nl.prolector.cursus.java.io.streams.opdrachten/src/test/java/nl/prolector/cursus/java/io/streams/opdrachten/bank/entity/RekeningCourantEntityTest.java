@@ -8,7 +8,7 @@ import org.junit.Test;
 import nl.prolector.cursus.java.io.streams.opdrachten.bank.vo.BankRekeningMemento;
 import nl.prolector.cursus.java.io.streams.opdrachten.bank.vo.CourantRekeningMemento;
 
-public class RekeningCourantFactoryTest {
+public class RekeningCourantEntityTest {
 
 	
 	
@@ -18,12 +18,12 @@ public class RekeningCourantFactoryTest {
 
 	@Test
 	public void testConstructor() {
-		RekeningCourantFactory aCourant = new RekeningCourantFactory("Harry", 10.0, 1003);
+		RekeningCourantEntity aCourant = new RekeningCourantEntity("Harry", 10.0, 1003);
 	}
 	
 	@Test
 	public void testGetHouder() {
-		RekeningCourantFactory aCourant = new RekeningCourantFactory("Harry", 10.0, 1003);
+		RekeningCourantEntity aCourant = new RekeningCourantEntity("Harry", 10.0, 1003);
 		String expected = "Harry";
 		String actual = aCourant.getHouder();
 		
@@ -34,7 +34,7 @@ public class RekeningCourantFactoryTest {
 	
 	@Test
 	public void testGetSaldo() {
-		RekeningCourantFactory aCourant = new RekeningCourantFactory("Harry", 10.51, 1003);
+		RekeningCourantEntity aCourant = new RekeningCourantEntity("Harry", 10.51, 1003);
 		Double expected = 10.51;
 		Double actual = aCourant.getSaldo();
 		
@@ -45,7 +45,7 @@ public class RekeningCourantFactoryTest {
 	
 	@Test
 	public void testRekeningNummer() {
-		RekeningCourantFactory aCourant = new RekeningCourantFactory("Harry", 10.51, 1003);
+		RekeningCourantEntity aCourant = new RekeningCourantEntity("Harry", 10.51, 1003);
 		Integer expected = 1003;
 		Integer actual = aCourant.getRekeningnummer();
 		
@@ -56,7 +56,7 @@ public class RekeningCourantFactoryTest {
 	
 	@Test
 	public void testStortBedrag() {
-		RekeningCourantFactory aCourant = new RekeningCourantFactory("Harry", 10.51, 1003);
+		RekeningCourantEntity aCourant = new RekeningCourantEntity("Harry", 10.51, 1003);
 		aCourant.stort(2.0);
 		
 		Double actual = aCourant.getSaldo();
@@ -71,13 +71,13 @@ public class RekeningCourantFactoryTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testStortBedragNegatief() {
-		RekeningCourantFactory aCourant = new RekeningCourantFactory("Harry", 10.51, 1003);
+		RekeningCourantEntity aCourant = new RekeningCourantEntity("Harry", 10.51, 1003);
 		aCourant.stort(-2.0);
 	}
 	
 	@Test
 	public void testNeemOp() {
-		RekeningCourantFactory aCourant = new RekeningCourantFactory("Harry", 10.51, 1003);
+		RekeningCourantEntity aCourant = new RekeningCourantEntity("Harry", 10.51, 1003);
 		try {
 			aCourant.neemOp(10.0);
 		} catch (Exception e) {
@@ -94,7 +94,7 @@ public class RekeningCourantFactoryTest {
 	
 	@Test (expected = Exception.class)
 	public void testNeemOpTeveel() throws Exception {
-		RekeningCourantFactory aCourant = new RekeningCourantFactory("Harry", 10.51, 1003);
+		RekeningCourantEntity aCourant = new RekeningCourantEntity("Harry", 10.51, 1003);
 		try {
 			aCourant.neemOp(20.0);
 		} catch (IllegalArgumentException e) {
@@ -106,7 +106,7 @@ public class RekeningCourantFactoryTest {
 		
 	@Test (expected = IllegalArgumentException.class)
 	public void testNeemOpNegatief() throws Exception {
-		RekeningCourantFactory aCourant = new RekeningCourantFactory("Harry", 10.51, 1003);
+		RekeningCourantEntity aCourant = new RekeningCourantEntity("Harry", 10.51, 1003);
 		aCourant.neemOp(-5.0);
 		
 	}
@@ -114,7 +114,7 @@ public class RekeningCourantFactoryTest {
 	
 	@Test
 	public void testgetState() {
-		RekeningCourantFactory aCourant = new RekeningCourantFactory("Harry", 10.51, 1003);
+		RekeningCourantEntity aCourant = new RekeningCourantEntity("Harry", 10.51, 1003);
 		BankRekeningMemento aMement = aCourant.getState();
 		
 		assertTrue(aMement!=null);
@@ -125,7 +125,7 @@ public class RekeningCourantFactoryTest {
 	
 	@Test
 	public void testsetState() {
-		RekeningCourantFactory aCourant = new RekeningCourantFactory();
+		RekeningCourantEntity aCourant = new RekeningCourantEntity();
 		CourantRekeningMemento aMement = new CourantRekeningMemento("Harry",10.51,1003);
 		
 		aCourant.setState(aMement);
