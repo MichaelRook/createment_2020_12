@@ -1,6 +1,5 @@
 package nl.prolector.cursus.java.io.streams.opdrachten.bank.entity;
 
-import java.io.PrintWriter;
 import java.io.Serializable;
 
 import nl.prolector.cursus.java.io.streams.opdrachten.bank.vo.BankRekeningMemento;
@@ -15,6 +14,7 @@ public abstract class AbstractBankrekeningEntity<S extends BankRekeningMemento> 
 	private double saldo;
 	private int rekeningnummer;
 	// private static int nieuwRekeningnummer = 1000;
+	private final static int PRIME = 59;
 
 	/**
 	 * Constructor used for creating empty bankrekeningen of type spaar or courant. An empty bankrekening
@@ -99,5 +99,12 @@ public abstract class AbstractBankrekeningEntity<S extends BankRekeningMemento> 
 	}
 
 	abstract S getState();
+	
+	public int hashCode() {
+		int value = AbstractBankrekeningEntity.PRIME;
+		value *= this.getRekeningnummer();
+		value *= this.getHouder().hashCode();
+		return value;
+	}
 
 }

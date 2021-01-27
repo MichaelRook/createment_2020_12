@@ -60,5 +60,10 @@ public class SpaarrekeningEntity extends AbstractBankrekeningEntity<SpaarRekenin
 		super.setState(inputState);
 
 	}
+	
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 
 }

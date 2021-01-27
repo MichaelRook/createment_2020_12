@@ -21,5 +21,10 @@ public class RekeningCourantEntity extends AbstractBankrekeningEntity<CourantRek
 				this.getRekeningnummer());
 		return aCourantMement;
 	}
+	
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 
 }
