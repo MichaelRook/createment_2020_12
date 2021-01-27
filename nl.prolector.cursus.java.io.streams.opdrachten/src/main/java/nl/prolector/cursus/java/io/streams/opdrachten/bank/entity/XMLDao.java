@@ -11,6 +11,9 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
+import nl.prolector.cursus.java.io.streams.opdrachten.bank.toa.BankEntity2BankWS;
+import nl.prolector.cursus.java.io.streams.opdrachten.bank.webservices.Bank;
+
 public class XMLDao implements BankDAO {
 
 	
@@ -32,7 +35,7 @@ public class XMLDao implements BankDAO {
 			File destination = new File( pathName );
 			
 			
-			JAXBContext aContext = JAXBContext.newInstance(BankEntity.class);
+			JAXBContext aContext = JAXBContext.newInstance(Bank.class);
 			
 			
 			//Create Marshaller
@@ -41,10 +44,12 @@ public class XMLDao implements BankDAO {
 			
 	        //Required formatting??
 	        jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-	
-			jaxbMarshaller.marshal( obj, destination );
+	        
+	        BankEntity2BankWS b2b = new BankEntity2BankWS();
+			Bank webBank = b2b.convert(obj);
+	        
+			jaxbMarshaller.marshal( webBank, destination );
 		
-			Binder<?> aBind = aContext.createBinder();
 			
 			
 			
