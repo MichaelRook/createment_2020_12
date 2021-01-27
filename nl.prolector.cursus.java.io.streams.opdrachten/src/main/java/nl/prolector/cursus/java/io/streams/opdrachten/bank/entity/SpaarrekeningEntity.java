@@ -2,7 +2,7 @@ package nl.prolector.cursus.java.io.streams.opdrachten.bank.entity;
 
 import nl.prolector.cursus.java.io.streams.opdrachten.bank.vo.SpaarRekeningMemento;
 
-public class SpaarrekeningFactory extends AbstractBankrekeningEntity<SpaarRekeningMemento> {
+public class SpaarrekeningEntity extends AbstractBankrekeningEntity<SpaarRekeningMemento> {
 
 	/**
 	 * 
@@ -12,7 +12,7 @@ public class SpaarrekeningFactory extends AbstractBankrekeningEntity<SpaarRekeni
 	protected static final double CREDIT_RENTE = 5.0;
 
 	
-	public SpaarrekeningFactory(String houder, double saldo, int rekeningnummer) {
+	public SpaarrekeningEntity(String houder, double saldo, int rekeningnummer) {
 		super(houder, saldo, rekeningnummer);
 	}
 
@@ -23,7 +23,7 @@ public class SpaarrekeningFactory extends AbstractBankrekeningEntity<SpaarRekeni
 	 * 
 	 */
 
-	SpaarrekeningFactory() {
+	SpaarrekeningEntity() {
 
 	}
 

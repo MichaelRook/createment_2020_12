@@ -45,7 +45,7 @@ public class BankEntity implements Serializable, Iterable<AbstractBankrekeningEn
 	public int openSpaarRekening(String houder, double saldo) {
 		checkSaldo(saldo);
 		int newRekeningNr = this.getNewRekeningnr();
-		SpaarrekeningFactory myNewRekening = new SpaarrekeningFactory(houder, saldo, newRekeningNr);
+		SpaarrekeningEntity myNewRekening = new SpaarrekeningEntity(houder, saldo, newRekeningNr);
 		this.voegRekeningToe(myNewRekening);
 		return newRekeningNr;
 	}
@@ -53,7 +53,7 @@ public class BankEntity implements Serializable, Iterable<AbstractBankrekeningEn
 	public int openRekeningCourant(String houder, double saldo) {
 		checkSaldo(saldo);
 		int newRekeningNr = this.getNewRekeningnr();
-		RekeningCourantFactory myNewRekening = new RekeningCourantFactory(houder, saldo, newRekeningNr);
+		RekeningCourantEntity myNewRekening = new RekeningCourantEntity(houder, saldo, newRekeningNr);
 		this.voegRekeningToe(myNewRekening);
 		return newRekeningNr;
 	}

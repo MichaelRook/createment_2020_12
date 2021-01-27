@@ -70,10 +70,10 @@ public class TextFileDAO implements BankDAO {
 				AbstractBankrekeningEntity<?> aBankRekening;
 				switch (rekeningType) {
 				case Spaar:
-					aBankRekening = new SpaarrekeningFactory(houder, saldo, rekeningNummer);
+					aBankRekening = new SpaarrekeningEntity(houder, saldo, rekeningNummer);
 					break;
 				case Courant:
-					aBankRekening = new RekeningCourantFactory(houder, saldo, rekeningNummer);
+					aBankRekening = new RekeningCourantEntity(houder, saldo, rekeningNummer);
 					break;
 
 				default:

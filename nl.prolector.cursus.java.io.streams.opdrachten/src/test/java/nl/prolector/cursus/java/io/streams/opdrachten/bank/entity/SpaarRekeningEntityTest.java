@@ -10,7 +10,7 @@ import org.junit.Test;
 import nl.prolector.cursus.java.io.streams.opdrachten.bank.vo.BankRekeningMemento;
 import nl.prolector.cursus.java.io.streams.opdrachten.bank.vo.SpaarRekeningMemento;
 
-public class SpaarRekeningFactoryTest {
+public class SpaarRekeningEntityTest {
 
 
 	
@@ -21,12 +21,12 @@ public class SpaarRekeningFactoryTest {
 
 	@Test
 	public void testConstructor() {
-		SpaarrekeningFactory aSpaar = new SpaarrekeningFactory("Harry", 10.0, 1003);
+		SpaarrekeningEntity aSpaar = new SpaarrekeningEntity("Harry", 10.0, 1003);
 	}
 	
 	@Test
 	public void testGetHouder() {
-		SpaarrekeningFactory aSpaar = new SpaarrekeningFactory("Harry", 10.0, 1003);
+		SpaarrekeningEntity aSpaar = new SpaarrekeningEntity("Harry", 10.0, 1003);
 		String expected = "Harry";
 		String actual = aSpaar.getHouder();
 		
@@ -37,7 +37,7 @@ public class SpaarRekeningFactoryTest {
 	
 	@Test
 	public void testGetSaldo() {
-		SpaarrekeningFactory aSpaar = new SpaarrekeningFactory("Harry", 10.51, 1003);
+		SpaarrekeningEntity aSpaar = new SpaarrekeningEntity("Harry", 10.51, 1003);
 		Double expected = 10.51;
 		Double actual = aSpaar.getSaldo();
 		
@@ -48,7 +48,7 @@ public class SpaarRekeningFactoryTest {
 	
 	@Test
 	public void testRekeningNummer() {
-		SpaarrekeningFactory aSpaar = new SpaarrekeningFactory("Harry", 10.51, 1003);
+		SpaarrekeningEntity aSpaar = new SpaarrekeningEntity("Harry", 10.51, 1003);
 		Integer expected = 1003;
 		Integer actual = aSpaar.getRekeningnummer();
 		
@@ -59,11 +59,11 @@ public class SpaarRekeningFactoryTest {
 	
 	@Test
 	public void testStortBedrag() {
-		SpaarrekeningFactory aSpaar = new SpaarrekeningFactory("Harry", 10.51, 1003);
+		SpaarrekeningEntity aSpaar = new SpaarrekeningEntity("Harry", 10.51, 1003);
 		aSpaar.stort(2.0);
 		
 		Double actual = aSpaar.getSaldo();
-		Double expected = 10.51 + 2.0 + 2.0*SpaarrekeningFactory.CREDIT_RENTE/100;
+		Double expected = 10.51 + 2.0 + 2.0*SpaarrekeningEntity.CREDIT_RENTE/100;
 		
 		
 		assertEquals(expected,actual);
@@ -74,13 +74,13 @@ public class SpaarRekeningFactoryTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testStortBedragNegatief() {
-		SpaarrekeningFactory aSpaar = new SpaarrekeningFactory("Harry", 10.51, 1003);
+		SpaarrekeningEntity aSpaar = new SpaarrekeningEntity("Harry", 10.51, 1003);
 		aSpaar.stort(-2.0);
 	}
 	
 	@Test
 	public void testNeemOp() {
-		SpaarrekeningFactory aSpaar = new SpaarrekeningFactory("Harry", 10.51, 1003);
+		SpaarrekeningEntity aSpaar = new SpaarrekeningEntity("Harry", 10.51, 1003);
 		try {
 			aSpaar.neemOp(5.0);
 		} catch (Exception e) {
@@ -89,7 +89,7 @@ public class SpaarRekeningFactoryTest {
 		}
 		
 		Double actual = aSpaar.getSaldo();
-		Double expected = 10.51 - (5.00 + SpaarrekeningFactory.BOETE_RENTE * 5.0 / 100.0);
+		Double expected = 10.51 - (5.00 + SpaarrekeningEntity.BOETE_RENTE * 5.0 / 100.0);
 		
 		assertEquals(expected,actual,0.000001);
 		
@@ -97,7 +97,7 @@ public class SpaarRekeningFactoryTest {
 	
 	@Test (expected = Exception.class)
 	public void testNeemOpTeveel() throws Exception {
-		SpaarrekeningFactory aSpaar = new SpaarrekeningFactory("Harry", 10.51, 1003);
+		SpaarrekeningEntity aSpaar = new SpaarrekeningEntity("Harry", 10.51, 1003);
 		try {
 			aSpaar.neemOp(20.0);
 		} catch (IllegalArgumentException e) {
@@ -109,7 +109,7 @@ public class SpaarRekeningFactoryTest {
 		
 	@Test (expected = Exception.class)
 	public void testNeemOpNegatief() throws Exception {
-		SpaarrekeningFactory aSpaar = new SpaarrekeningFactory("Harry", 10.51, 1003);
+		SpaarrekeningEntity aSpaar = new SpaarrekeningEntity("Harry", 10.51, 1003);
 		aSpaar.neemOp(-5.0);
 		
 	}
@@ -117,7 +117,7 @@ public class SpaarRekeningFactoryTest {
 	
 	@Test
 	public void testgetState() {
-		SpaarrekeningFactory aSpaar = new SpaarrekeningFactory("Harry", 10.51, 1003);
+		SpaarrekeningEntity aSpaar = new SpaarrekeningEntity("Harry", 10.51, 1003);
 		BankRekeningMemento aMement = aSpaar.getState();
 		
 		assertTrue(aMement!=null);
@@ -128,7 +128,7 @@ public class SpaarRekeningFactoryTest {
 	
 	@Test
 	public void testsetState() {
-		SpaarrekeningFactory aSpaar = new SpaarrekeningFactory();
+		SpaarrekeningEntity aSpaar = new SpaarrekeningEntity();
 		SpaarRekeningMemento aMement = new SpaarRekeningMemento("Harry",10.51,1003);
 		
 		aSpaar.setState(aMement);
@@ -142,14 +142,14 @@ public class SpaarRekeningFactoryTest {
 	
 	@Test
 	public void testPrintBoeteCreditPrecentages() {
-		SpaarrekeningFactory aSpaar = new SpaarrekeningFactory("Harry",10.51,1003);
+		SpaarrekeningEntity aSpaar = new SpaarrekeningEntity("Harry",10.51,1003);
 		aSpaar.print();
 	}
 	
 	
 	@Test
 	public void testToStringMethod() {
-		SpaarrekeningFactory aSpaar = new SpaarrekeningFactory("Harry",10.51,1003);
+		SpaarrekeningEntity aSpaar = new SpaarrekeningEntity("Harry",10.51,1003);
 		String actual = aSpaar.toString();
 		String expected = "Bankrekening [houder=Harry, saldo=10.51, rekeningnummer=1003]";
 		assertEquals(expected,actual);
