@@ -8,8 +8,8 @@ public class SpaarrekeningFactory extends AbstractBankrekeningEntity<SpaarRekeni
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final double BOETE_RENTE = 10.0;
-	private static final double CREDIT_RENTE = 5.0;
+	protected static final double BOETE_RENTE = 10.0;
+	protected static final double CREDIT_RENTE = 5.0;
 
 	
 	public SpaarrekeningFactory(String houder, double saldo, int rekeningnummer) {
@@ -31,6 +31,7 @@ public class SpaarrekeningFactory extends AbstractBankrekeningEntity<SpaarRekeni
 	public void stort(double bedrag) {
 		super.stort(bedrag + CREDIT_RENTE * bedrag / 100.0);
 	}
+	
 
 	@Override
 	public void neemOp(double bedrag) throws Exception {

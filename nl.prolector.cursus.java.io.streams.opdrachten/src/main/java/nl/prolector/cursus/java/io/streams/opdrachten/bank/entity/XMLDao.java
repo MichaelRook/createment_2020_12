@@ -10,6 +10,10 @@ import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
 
 import nl.prolector.cursus.java.io.streams.opdrachten.bank.toa.BankEntity2BankWS;
 import nl.prolector.cursus.java.io.streams.opdrachten.bank.webservices.Bank;
@@ -78,7 +82,9 @@ public class XMLDao implements BankDAO {
 
 	@Override
 	public Optional<BankEntity> read(String aBankNaam) {
-		// TODO Auto-generated method stub
+		
+		
+		
 		return null;
 	}
 

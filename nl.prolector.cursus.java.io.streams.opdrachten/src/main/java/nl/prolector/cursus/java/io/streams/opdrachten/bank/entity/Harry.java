@@ -20,6 +20,10 @@ public class Harry {
 		rabobank.openRekeningCourant("Michael", 10000.0);
 		rabobank.openSpaarRekening("Roel", 10000000000.0);
 		
+		
+		
+		
+		
 		BankDAO dao = new BinFileDAO();
 		dao.add(rabobank);
 		Optional<BankEntity> abc = dao.read("Rabobank");

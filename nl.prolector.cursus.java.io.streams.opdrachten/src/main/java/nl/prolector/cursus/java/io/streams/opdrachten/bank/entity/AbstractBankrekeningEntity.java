@@ -16,8 +16,15 @@ public abstract class AbstractBankrekeningEntity<S extends BankRekeningMemento> 
 	private int rekeningnummer;
 	// private static int nieuwRekeningnummer = 1000;
 
+	/**
+	 * Constructor used for creating empty bankrekeningen of type spaar or courant. An empty bankrekening
+	 * Object can subsequently be filled using a {@link nl.prolector.cursus.java.io.streams.opdrachten.bank.vo.BankRekeningMemento} instance
+	 * using the method {@link #setState(BankRekeningMemento)}.
+	 */
 	public AbstractBankrekeningEntity() {
 	}
+	
+	
 
 	public AbstractBankrekeningEntity(String houder, double saldo, int rekeningnummer) {
 		this.houder = houder;
@@ -26,10 +33,20 @@ public abstract class AbstractBankrekeningEntity<S extends BankRekeningMemento> 
 
 	}
 
+	/**
+	 * Retrieve houder name from bankRekening Object
+	 * @return a String
+	 */
+	
 	public String getHouder() {
 		return this.houder;
 	}
 
+	/**
+	 * Retrieve saldo value from bankRekening Object
+	 * @return a double
+	 */
+	
 	public double getSaldo() {
 		return this.saldo;
 	}
@@ -68,9 +85,7 @@ public abstract class AbstractBankrekeningEntity<S extends BankRekeningMemento> 
 		System.out.printf("Nummer: %d%n", this.rekeningnummer);
 	}
 
-	public void save(PrintWriter out) {
-
-	}
+	
 
 	void setState(S inputState) {
 		this.houder = inputState.getHouder();
