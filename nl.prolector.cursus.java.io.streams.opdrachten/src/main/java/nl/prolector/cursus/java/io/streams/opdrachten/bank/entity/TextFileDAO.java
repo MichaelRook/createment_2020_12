@@ -54,7 +54,7 @@ public class TextFileDAO implements BankDAO {
 		BankEntity aBank;
 		String fileName = TextFileDAO.convertToFileName(aBankNaam);
 		try (LineNumberReader aLineNumberReader = new LineNumberReader(new FileReader(fileName));) {
-			String bankNaam = aLineNumberReader.readLine().trim();
+			String bankNaam = aBankNaam;
 			aBank = new BankEntity(bankNaam);
 			String nextLine;
 			int maxRekeningNummer = BankEntity.EERSTE_REKENINGNR;
