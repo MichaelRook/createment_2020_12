@@ -16,7 +16,9 @@ import nl.prolector.cursus.java.io.streams.opdrachten.bank.entity.TextFileDAO;
 public class TxtFileIT {
 
 
-	
+	{
+		System.out.println("Oya lele");
+	}
 	
 	@Test
 	public void testWriteBankTxt() {
