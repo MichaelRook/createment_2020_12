@@ -1,5 +1,6 @@
 package daotests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -61,7 +62,8 @@ public class TxtFileIT {
 
 		assertTrue("The stored bank is not present.",recoveredBank.isPresent());
 		BankEntity bBank = recoveredBank.get();
-		//assertEquals(aBank,bBank)
+		assertEquals(aBank,bBank);
+		
 		
 	}
 	

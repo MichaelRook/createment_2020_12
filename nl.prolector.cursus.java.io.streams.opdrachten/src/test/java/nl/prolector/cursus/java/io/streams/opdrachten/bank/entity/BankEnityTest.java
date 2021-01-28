@@ -2,6 +2,7 @@ package nl.prolector.cursus.java.io.streams.opdrachten.bank.entity;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -55,15 +56,57 @@ public class BankEnityTest {
 	}
 	
 	@Test
-	public void testHashCode() {
-		String string1 = "My Bank";
-		String string2 = "Their Bank";
+	public void testHashCodeFalse() {
+
 		BankEntity bank1 = new BankEntity("My Bank");
 		BankEntity bank2 = new BankEntity("Their Bank");
 		
-		assertEquals(string1.hashCode(), bank1.hashCode()); 
-		assertEquals(string2.hashCode(), bank2.hashCode());
 		assertFalse(bank1.hashCode() == bank2.hashCode());
 		
+		
 	}
+	
+	@Test
+	public void testHashCodeTrue() {
+		BankEntity bank1 = new BankEntity("My Bank");
+		BankEntity bank2 = new BankEntity("My Bank");
+		assertTrue(bank1.hashCode() == bank2.hashCode());
+	}
+	
+	@Test
+	public void testEqualsTrue() {
+		BankEntity bank1 = new BankEntity("My Bank");
+		BankEntity bank2 = new BankEntity("My Bank");
+		bank1.openRekeningCourant("piet", 10.0);
+		bank2.openRekeningCourant("piet", 10.0);
+		assertTrue(bank1.equals(bank2));
+		}
+	
+	@Test
+	public void testEqualsFalse() {
+		BankEntity bank1 = new BankEntity("My Bank");
+		BankEntity bank2 = new BankEntity("My Bank");
+		BankEntity bank3 = new BankEntity("My Bank");
+
+		bank1.openRekeningCourant("piet", 10.0);
+		bank2.openSpaarRekening("piet", 10.0);
+		assertFalse(bank1.equals(bank2));
+		
+	}
+	
+	@Test
+	public void testEqualsNull() {
+		BankEntity bank1 = new BankEntity("My Bank");
+		assertFalse(bank1.equals(null));
+	}
+	
+	@Test
+	public void testEqualsObject() {
+		BankEntity bank1 = new BankEntity("My Bank");
+		Object object1 = new Object();
+		assertFalse(bank1.equals(object1));
+
+	}
+
+
 }

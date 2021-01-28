@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 
-public class BankEntity implements Serializable, Iterable<AbstractBankrekeningEntity<?>> {
+public class BankEntity implements Serializable, Iterable<AbstractBankrekeningEntity<?>>, Cloneable {
 
 
 	/**
@@ -217,4 +217,24 @@ public class BankEntity implements Serializable, Iterable<AbstractBankrekeningEn
 	public int hashCode() {
 		return this.getNaam().hashCode();
 	}
+	
+	/**
+	 * returns true if shallow is equal
+	 * @param that
+	 * @return
+	 */
+	public boolean isIdentical(BankEntity that) {
+		return this.getNaam().equals(that.getNaam());
+	}
+	
+	@Override 
+	public boolean equals(Object obj) {
+			boolean equals = super.equals(obj);
+			if (!equals && obj instanceof BankEntity) {
+				final BankEntity that = (BankEntity) obj;
+				equals = this.isIdentical(that) && this.rekeningen.equals(that.rekeningen);
+			}
+			return equals;
+	}	
+
 }
