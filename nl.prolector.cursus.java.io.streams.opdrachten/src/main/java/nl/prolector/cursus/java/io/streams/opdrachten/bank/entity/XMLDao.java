@@ -154,7 +154,7 @@ public class XMLDao implements BankDAO {
 		} catch (Exception e) {
 		
 			bankEntity = null;
-			e.printStackTrace();	
+			// e.printStackTrace();	
 		}
 		
 		return Optional.ofNullable(bankEntity);

@@ -94,17 +94,6 @@ public abstract class AbstractBankrekeningEntity<S extends BankRekeningMemento> 
 	}
 
 	
-	/**
-	 * Prints the naam, saldo and nummer of this Bankrekening to the console;
-	 * 
-	 */
-	
-	public void print() {
-		System.out.printf("----------------------------------------%n");
-		System.out.printf("Naam  : %s%n", this.houder);
-		System.out.printf("Saldo : %.2f%n", this.saldo);
-		System.out.printf("Nummer: %d%n", this.rekeningnummer);
-	}
 
 	
 	/**

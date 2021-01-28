@@ -44,7 +44,7 @@ public class BankEnityTest {
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testNumber() {
+	public void testNameWithNumber() {
 		BankEntity aBank = new BankEntity("Bank2");
 		
 	}
@@ -124,6 +124,33 @@ public class BankEnityTest {
 		bank1.compareTo(null);
 
 	}
+	
+	@Test 
+	public void testGetNummer() {
+		BankEntity bank1 = new BankEntity("My Bank");
+		bank1.openRekeningCourant("piet", 10.0);
+		assertEquals(bank1.getRekeningNr("piet"), 1001);
+
+	}
+	
+	@Test 
+	public void testOverschrijvingTrue() throws Exception {
+		BankEntity bank1 = new BankEntity("My Bank");
+		bank1.openRekeningCourant("piet", 10.0);
+		bank1.openRekeningCourant("henk", 10.0);
+		bank1.overschrijving(1001, 1002, 5.0);
+		assertTrue(bank1.getSaldo(1002) == 15.0);
+	}
+	
+	@Test 
+	public void testOpheffenRekening() {
+		BankEntity bank1 = new BankEntity("My Bank");
+		bank1.openRekeningCourant("piet", 10.0);
+		assertEquals(1001, bank1.getRekeningNr("piet"));
+		bank1.opheffenRekening(1001);
+		assertEquals(-1, bank1.getRekeningNr("piet"));
+	}
+
 
 
 }
