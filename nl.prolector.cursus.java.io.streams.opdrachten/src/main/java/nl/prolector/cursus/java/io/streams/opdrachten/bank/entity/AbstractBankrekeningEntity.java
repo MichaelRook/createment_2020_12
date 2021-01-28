@@ -135,5 +135,18 @@ public abstract class AbstractBankrekeningEntity<S extends BankRekeningMemento> 
 		value *= this.getHouder().hashCode();
 		return value;
 	}
+	
+	@Override
+	public  boolean equals(Object obj) {
+		boolean equals = super.equals(obj);
+		if (!equals && obj instanceof AbstractBankrekeningEntity) {
+			final AbstractBankrekeningEntity<?> that = (AbstractBankrekeningEntity<?>) obj;
+			equals = this.getHouder().equals(that.getHouder()) 
+					&& this.getRekeningnummer() == that.getRekeningnummer()
+					&& this.hashCode() == that.hashCode();
+		}
+		return equals;
+
+	}
 
 }
