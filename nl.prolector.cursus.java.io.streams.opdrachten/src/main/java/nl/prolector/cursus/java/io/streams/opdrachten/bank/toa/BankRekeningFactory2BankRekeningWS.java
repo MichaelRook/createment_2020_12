@@ -1,6 +1,7 @@
 package nl.prolector.cursus.java.io.streams.opdrachten.bank.toa;
 
-import java.math.*;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import nl.prolector.cursus.java.io.streams.opdrachten.bank.entity.AbstractBankrekeningEntity;
 import nl.prolector.cursus.java.io.streams.opdrachten.bank.webservices.BankRekening;
@@ -15,13 +16,13 @@ public class BankRekeningFactory2BankRekeningWS implements TransferableObjectAss
 		ObjectFactory bankRekeningFactory = new ObjectFactory();
 		
 		switch (a.getClass().getSimpleName()) {
-		case "RekeningCourantFactory":
+		case "RekeningCourantEntity":
 			
 			aBankRekening = bankRekeningFactory.createRekeningCourant();
 		
 			break;
 
-		case "SpaarrekeningFactory":
+		case "SpaarrekeningEntity":
 			
 			aBankRekening = bankRekeningFactory.createSpaarRekening();
 			break;
