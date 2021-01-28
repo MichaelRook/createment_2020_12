@@ -236,5 +236,21 @@ public class BankEntity implements Serializable, Iterable<AbstractBankrekeningEn
 			}
 			return equals;
 	}	
+	
+	public int compareTo(BankEntity that) {
+		if (that == null) {
+			throw new IllegalArgumentException("pannekoek");
+			
+		}
+		Integer value = this.getNaam().compareTo(that.getNaam());
+		if (value<0) {
+			value = -1;	
+		} 
+		else if (value>0) {
+			value = 1;
+		} 
+		this.getNaam().compareTo(that.getNaam());
+		return value;
+	}
 
 }

@@ -107,6 +107,23 @@ public class BankEnityTest {
 		assertFalse(bank1.equals(object1));
 
 	}
+	
+	@Test
+	public void testCompareToTrue() {
+		BankEntity bank1 = new BankEntity("My Bank");
+		BankEntity bank2 = new BankEntity("Their Bank");
+		int actual = bank1.compareTo(bank2);
+		int expected = -1;
+		assertEquals(expected, actual);		
+
+	}
+	
+	@Test (expected = IllegalArgumentException.class)
+	public void testCompareToNull() {
+		BankEntity bank1 = new BankEntity("My Bank");
+		bank1.compareTo(null);
+
+	}
 
 
 }
