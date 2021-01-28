@@ -16,9 +16,7 @@ import nl.prolector.cursus.java.io.streams.opdrachten.bank.vo.RekeningenType;
 
 public class SqlDao implements BankDAO {
 	
-	private void helloMichael() {
-		System.out.println("helloMichael");
-	}
+
 	
 	private Connection create() throws SQLException {
 		Properties props = SqlDao.getProperties();
@@ -127,15 +125,6 @@ public class SqlDao implements BankDAO {
 		return props;
 	}
 
-	public static void main(String[] args) {
-		BankDAO aDao = new SqlDao();
-		BankEntity abnAmro = new BankEntity("Har7");
-		abnAmro.openRekeningCourant("sam", 10);
-		abnAmro.openRekeningCourant("clover", 10.0);
-		abnAmro.openSpaarRekening("steve", 29.0d);
 
-		System.out.println(aDao.add(abnAmro));
-
-	}
 
 }

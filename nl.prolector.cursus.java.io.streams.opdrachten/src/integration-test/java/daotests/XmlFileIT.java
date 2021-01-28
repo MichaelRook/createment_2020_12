@@ -1,9 +1,12 @@
 package daotests;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
@@ -16,11 +19,14 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import nl.prolector.cursus.java.io.streams.opdrachten.bank.entity.BankEntity;
+import nl.prolector.cursus.java.io.streams.opdrachten.bank.entity.JsonDao;
+import nl.prolector.cursus.java.io.streams.opdrachten.bank.entity.TextFileDAO;
 import nl.prolector.cursus.java.io.streams.opdrachten.bank.entity.XMLDao;
 
 public class XmlFileIT {
@@ -64,6 +70,52 @@ public class XmlFileIT {
 		
 		
 	}
+	
+	
+	@Before
+	public void setup() {
+		BankEntity aBank = new BankEntity("TestBank");
+		aBank.openRekeningCourant("Timothy", 0.01);
+		aBank.openSpaarRekening("Mushu", 200.10);
+		aBank.openRekeningCourant("Simba", 10.50);
+		aBank.openSpaarRekening("Dagobert", 200_000_000.10);
+		aBank.openRekeningCourant("Nala", 10.30);
+		
+		XMLDao aDao = new XMLDao();
+		aDao.add(aBank);
+	}
+	
+	
+	@Test
+	public void testReadBankXML() {
+		BankEntity aBank = new BankEntity("TestBank");
+		aBank.openRekeningCourant("Timothy", 0.01);
+		aBank.openSpaarRekening("Mushu", 200.10);
+		aBank.openRekeningCourant("Simba", 10.50);
+		aBank.openSpaarRekening("Dagobert", 200_000_000.10);
+		aBank.openRekeningCourant("Nala", 10.30);
+		
+		XMLDao aDao = new XMLDao();
+		Optional<BankEntity> recoveredBank = aDao.read("TestBank");
+
+		assertTrue("The stored bank is not present.",recoveredBank.isPresent());
+		BankEntity bBank = recoveredBank.get();
+		assertEquals(aBank,bBank);
+	}
+	
+	@Test
+	public void testReadNonExistingBankTxt() {
+		
+		
+		XMLDao aDao = new XMLDao();
+		Optional<BankEntity> recoveredBank = aDao.read("BloedBank");
+		assertFalse(recoveredBank.isPresent());
+		
+		
+	}
+	
+	
+
 	
 	
 	/**

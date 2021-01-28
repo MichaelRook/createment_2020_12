@@ -11,15 +11,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 import nl.prolector.cursus.java.io.streams.opdrachten.bank.entity.BankEntity;
-import nl.prolector.cursus.java.io.streams.opdrachten.bank.entity.TextFileDAO;
+import nl.prolector.cursus.java.io.streams.opdrachten.bank.entity.BinFileDAO;
 
-public class TxtFileIT {
+public class BinFileIT {
+
+	@Before
+	public void setUp() throws Exception {
+	}
 
 
-	
-	
 	@Test
-	public void testWriteBankTxt() {
+	public void testWriteBankJson() {
 		BankEntity aBank = new BankEntity("TestBank");
 		aBank.openRekeningCourant("Timothy", 0.01);
 		aBank.openSpaarRekening("Mushu", 200.10);
@@ -27,30 +29,18 @@ public class TxtFileIT {
 		aBank.openSpaarRekening("Dagobert", 200_000_000.10);
 		aBank.openRekeningCourant("Nala", 10.30);
 		
-		TextFileDAO aDao = new TextFileDAO();
+		BinFileDAO aDao = new BinFileDAO();
 		aDao.add(aBank);
 		
-		boolean isPresent = new File("target/", "TestBank.txt").exists();
+		boolean isPresent = new File("target/", "TestBank.bin").exists();
 		assertTrue("The file TestBank was not correctly written to target/.",isPresent);
 		
 	}
-	
-	
-	@Before
-	public void setup() {
-		BankEntity aBank = new BankEntity("TestBank");
-		aBank.openRekeningCourant("Timothy", 0.01);
-		aBank.openSpaarRekening("Mushu", 200.10);
-		aBank.openRekeningCourant("Simba", 10.50);
-		aBank.openSpaarRekening("Dagobert", 200_000_000.10);
-		aBank.openRekeningCourant("Nala", 10.30);
-		
-		TextFileDAO aDao = new TextFileDAO();
-		aDao.add(aBank);
-	}
+
+
 	
 	@Test
-	public void testReadBankTxt() {
+	public void testReadBankJson() {
 		BankEntity aBank = new BankEntity("TestBank");
 		aBank.openRekeningCourant("Timothy", 0.01);
 		aBank.openSpaarRekening("Mushu", 200.10);
@@ -58,7 +48,7 @@ public class TxtFileIT {
 		aBank.openSpaarRekening("Dagobert", 200_000_000.10);
 		aBank.openRekeningCourant("Nala", 10.30);
 		
-		TextFileDAO aDao = new TextFileDAO();
+		BinFileDAO aDao = new BinFileDAO();
 		Optional<BankEntity> recoveredBank = aDao.read("TestBank");
 
 		assertTrue("The stored bank is not present.",recoveredBank.isPresent());
@@ -68,22 +58,15 @@ public class TxtFileIT {
 		
 	}
 	
-	
 	@Test
-	public void testReadNonExistingBankTxt() {
+	public void testReadNonExistingBankJson() {
 		
 		
-		TextFileDAO aDao = new TextFileDAO();
+		BinFileDAO aDao = new BinFileDAO();
 		Optional<BankEntity> recoveredBank = aDao.read("BloedBank");
 		assertFalse(recoveredBank.isPresent());
 		
 		
 	}
-	
-	
-	
-	
-	
-	
 
 }
