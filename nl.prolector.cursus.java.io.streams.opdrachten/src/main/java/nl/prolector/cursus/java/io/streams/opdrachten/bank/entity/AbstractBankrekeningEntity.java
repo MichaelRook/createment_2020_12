@@ -129,6 +129,9 @@ public abstract class AbstractBankrekeningEntity<S extends BankRekeningMemento> 
 	 */
 	abstract S getState();
 	
+	/**
+	 * creates hashCode based on prime value, nummer and houder. 
+	 */
 	public int hashCode() {
 		int value = AbstractBankrekeningEntity.PRIME;
 		value *= this.getRekeningnummer();
@@ -136,6 +139,11 @@ public abstract class AbstractBankrekeningEntity<S extends BankRekeningMemento> 
 		return value;
 	}
 	
+	/**
+	 * checks if two AbstractBankrekeningEntity instances are equal. 
+	 * returns true if super.equals is false, if obj is a bankrekening instance, and if all fields are equal.'
+	 * fields: houder, rekeningnummer, hashcode.
+	 */
 	@Override
 	public  boolean equals(Object obj) {
 		boolean equals = super.equals(obj);

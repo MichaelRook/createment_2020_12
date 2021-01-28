@@ -27,6 +27,9 @@ public class RekeningCourantEntity extends AbstractBankrekeningEntity<CourantRek
 		return super.hashCode();
 	}
 	
+	/**
+	 * adds constraint that obj is an instance of RekeningCourantEntity.
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		return super.equals(obj) && obj instanceof RekeningCourantEntity;

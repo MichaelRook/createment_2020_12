@@ -227,6 +227,11 @@ public class BankEntity implements Serializable, Iterable<AbstractBankrekeningEn
 		return this.getNaam().equals(that.getNaam());
 	}
 	
+	/**
+	 * compares BankEntity instances. returns true if (1) super.equals() is false, 
+	 * (2) given object is an instance of BankEntity, 
+	 * (3) BankEntity names are identical, and (4) TreeMaps are equal.
+	 */
 	@Override 
 	public boolean equals(Object obj) {
 			boolean equals = super.equals(obj);
@@ -236,5 +241,27 @@ public class BankEntity implements Serializable, Iterable<AbstractBankrekeningEn
 			}
 			return equals;
 	}	
+	
+	/**
+	 * lexicographically compares BankEntity names. 
+	 * returns -1 if this < that, 0 if this == that, 1 if this > that.
+	 * @param that
+	 * @return
+	 */
+	public int compareTo(BankEntity that) {
+		if (that == null) {
+			throw new IllegalArgumentException("pannekoek");
+			
+		}
+		Integer value = this.getNaam().compareTo(that.getNaam());
+		if (value<0) {
+			value = -1;	
+		} 
+		else if (value>0) {
+			value = 1;
+		} 
+		this.getNaam().compareTo(that.getNaam());
+		return value;
+	}
 
 }
