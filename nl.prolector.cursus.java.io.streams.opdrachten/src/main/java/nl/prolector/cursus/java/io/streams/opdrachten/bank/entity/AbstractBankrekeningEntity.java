@@ -17,8 +17,8 @@ public abstract class AbstractBankrekeningEntity<S extends BankRekeningMemento> 
 	private final static int PRIME = 59;
 
 	/**
-	 * Constructor used for creating empty bankrekeningen of type spaar or courant. An empty bankrekening
-	 * Object can subsequently be filled using a {@link nl.prolector.cursus.java.io.streams.opdrachten.bank.vo.BankRekeningMemento} instance
+	 * Constructor used for creating empty Bankrekeningen of type spaar or courant. An empty Bankrekening
+	 * object can subsequently be filled using a {@link BankRekeningMemento} instance
 	 * using the method {@link #setState(BankRekeningMemento)}.
 	 */
 	public AbstractBankrekeningEntity() {
@@ -50,11 +50,22 @@ public abstract class AbstractBankrekeningEntity<S extends BankRekeningMemento> 
 	public double getSaldo() {
 		return this.saldo;
 	}
+	
+	/**
+	 * Retrieve BankRekening nummer from  this BankRekening
+	 * @return an Integer
+	 */
 
 	public int getRekeningnummer() {
 		return this.rekeningnummer;
 	}
 
+	/**
+	 * Allows for depositing a non-negative bedrag into this Bankrekening
+	 * @param bedrag
+	 * @throws IllegalArgumentException If provided bedrag is negative
+	 */
+	
 	public void stort(double bedrag) {
 		assert saldo > 0.0 : "Saldo is negatief";
 		if (bedrag < 0.0) {
@@ -64,7 +75,12 @@ public abstract class AbstractBankrekeningEntity<S extends BankRekeningMemento> 
 	}
 
 	
-	//TODO: zorg voor fout exceptie beter. 
+	/**
+	 * Allows for withdrawing a non-negative bedrag from this Bankrekening
+	 * @param bedrag
+	 * @throws Exception If remaining bedrag after withdrawl would be below 0.0.
+	 * 
+	 */ 
 	public void neemOp(double bedrag) throws Exception {
 		assert saldo > 0.0 : "Saldo is negatief";
 		if (bedrag < 0.0) {
@@ -78,6 +94,11 @@ public abstract class AbstractBankrekeningEntity<S extends BankRekeningMemento> 
 	}
 
 	
+	/**
+	 * Prints the naam, saldo and nummer of this Bankrekening to the console;
+	 * 
+	 */
+	
 	public void print() {
 		System.out.printf("----------------------------------------%n");
 		System.out.printf("Naam  : %s%n", this.houder);
@@ -86,7 +107,11 @@ public abstract class AbstractBankrekeningEntity<S extends BankRekeningMemento> 
 	}
 
 	
-
+	/**
+	 * Uses a {@link BankRekeningMemento} in order to
+	 * set the states (naam houder, rekeningnummer & saldo ) of this bankrekening object.
+	 * @param inputState
+	 */
 	void setState(S inputState) {
 		this.houder = inputState.getHouder();
 		this.rekeningnummer = inputState.getRekeningnummer();
@@ -98,6 +123,10 @@ public abstract class AbstractBankrekeningEntity<S extends BankRekeningMemento> 
 		return String.format("Bankrekening [houder=%s, saldo=%s, rekeningnummer=%s]", houder, saldo, rekeningnummer);
 	}
 
+	/**
+	 * Retrieve the state of the current bankrekening (naam houder, rekeningnummer & saldo ) using a {@linkplain nl.prolector.crusus.java.io.streams.opdrachten.bank.vo.BankRekeningMemento}
+	 * @return a {@link BankRekeningMemento}
+	 */
 	abstract S getState();
 	
 	public int hashCode() {
