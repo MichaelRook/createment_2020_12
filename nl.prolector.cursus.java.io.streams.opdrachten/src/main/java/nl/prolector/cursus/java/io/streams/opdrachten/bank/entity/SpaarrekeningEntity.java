@@ -51,14 +51,6 @@ public class SpaarrekeningEntity extends AbstractBankrekeningEntity<SpaarRekenin
 		}
 	}
 
-	
-	@Override
-	public void print() {
-		super.print();
-		System.out.printf("Boeterente is %.1f%%%n", BOETE_RENTE);
-		System.out.printf("Creditrente is %.1f%%%n", CREDIT_RENTE);
-	}
-
 	SpaarRekeningMemento getState() {
 		SpaarRekeningMemento aSpaarMement = new SpaarRekeningMemento(this.getHouder(), this.getSaldo(),
 				this.getRekeningnummer());

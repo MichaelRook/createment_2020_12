@@ -45,7 +45,7 @@ public class BankEntity implements Serializable, Iterable<AbstractBankrekeningEn
 			throw new IllegalArgumentException(msg);
 		}
 		this.rekeningen = new TreeMap<Integer, AbstractBankrekeningEntity<?>>();
-		this.naam = aNaam;
+		this.naam = aNaam; 
 	}
 
 	/**
@@ -161,16 +161,7 @@ public class BankEntity implements Serializable, Iterable<AbstractBankrekeningEn
 		this.stort(naarRekeningNr, bedrag);
 	}
 
-	/**
-	 * prints the rekeningen of the current bank to the console, invokes the function {@link AbstractBankrekeningEntity#print()}
-	 * 
-	 */
-	
-	public void print() {
-		for (AbstractBankrekeningEntity<?> b : this.rekeningen.values()) {
-			b.print();
-		}
-	}
+
 
 	// Let Op: private Alleen voor gebruik binnen de class Bank
 	void voegRekeningToe(AbstractBankrekeningEntity<?> rekening) {

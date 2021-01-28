@@ -140,14 +140,6 @@ public class SpaarRekeningEntityTest {
 		
 	}
 	
-	
-	@Test
-	public void testPrintBoeteCreditPrecentages() {
-		SpaarrekeningEntity aSpaar = new SpaarrekeningEntity("Harry",10.51,1003);
-		aSpaar.print();
-	}
-	
-	
 	@Test
 	public void testToStringMethod() {
 		SpaarrekeningEntity aSpaar = new SpaarrekeningEntity("Harry",10.51,1003);
