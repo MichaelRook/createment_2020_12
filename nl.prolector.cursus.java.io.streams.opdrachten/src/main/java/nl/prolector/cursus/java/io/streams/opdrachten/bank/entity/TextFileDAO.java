@@ -90,7 +90,6 @@ public class TextFileDAO implements BankDAO {
 
 		} catch (Exception e) {
 			aBank = null;
-			e.printStackTrace();
 			System.out.println("readen ging fout");
 		}
 

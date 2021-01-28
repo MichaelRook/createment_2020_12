@@ -152,37 +152,9 @@ public class JsonDao implements BankDAO {
 		StringBuilder fileName = new StringBuilder("target/");
 		fileName.append(bankNaam);
 		fileName.append(".json");
-		System.out.println(fileName.toString());
 		return fileName.toString();
 	}
 
-	public static void main(String[] args) {
-
-		BankDAO aDao = new JsonDao();
-		BankEntity abnAmro = new BankEntity("Triodos");
-		abnAmro.openRekeningCourant("sam", 10);
-		abnAmro.openRekeningCourant("clover", 10.29);
-		abnAmro.openSpaarRekening("steve", 29.0d);
-
-		System.out.println(aDao.add(abnAmro));
-		
-		Optional<BankEntity> resultBank = aDao.read("Triodos");
 	
-		if(resultBank.isPresent()) {
-			BankEntity theBank = resultBank.get();
-			System.out.println(theBank.getNaam());
-			System.out.println();
-			for(AbstractBankrekeningEntity<?> entry : theBank) {
-				System.out.println(entry.getHouder());
-				System.out.println(entry.getSaldo());
-				System.out.println(entry.getClass().getSimpleName());
-				System.out.println("++++++++++++++++++++");
-			}
-		}else {
-			System.out.println("no way jose");
-		}
-		
-		
-	}
 
 }

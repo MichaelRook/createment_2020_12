@@ -162,37 +162,11 @@ public class XMLDao implements BankDAO {
 
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-		BankDAO aDao = new XMLDao();
-		BankEntity triodos = new BankEntity("Triodos");
-		triodos.openRekeningCourant("sam", 10);
-		triodos.openRekeningCourant("clover", 10.29);
-		triodos.openSpaarRekening("steve", 29.0d);
-
-//		aDao.add(triodos);
-		BankEntity triodosEntity;
-		Optional<BankEntity> triodosOptional = aDao.read("Triodos");
-		if (triodosOptional.isPresent()) {
-			triodosEntity = triodosOptional.get();
-			System.out.println(triodosEntity.getNaam());
-			System.out.println("Bank naam: " + "=================");
-			for (AbstractBankrekeningEntity<?> rekening : triodosEntity) {
-				System.out.println(rekening.getRekeningnummer());
-				System.out.println(rekening.getHouder());
-				System.out.println(rekening.getSaldo());
-				System.out.println("====================");
-
-
-
-			}
-
-		} 
+	
 		
 		
 		
 		
-	}
+	
 
 }
