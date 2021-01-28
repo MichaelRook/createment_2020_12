@@ -212,4 +212,9 @@ public class BankEntity implements Serializable, Iterable<AbstractBankrekeningEn
 	public Iterator<AbstractBankrekeningEntity<?>> iterator() {
 		return this.rekeningen.values().iterator();
 	}
+	
+	@Override
+	public int hashCode() {
+		return this.getNaam().hashCode();
+	}
 }
