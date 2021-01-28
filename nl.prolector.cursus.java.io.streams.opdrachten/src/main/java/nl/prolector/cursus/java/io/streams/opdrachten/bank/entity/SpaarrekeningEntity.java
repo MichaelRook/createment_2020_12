@@ -71,11 +71,15 @@ public class SpaarrekeningEntity extends AbstractBankrekeningEntity<SpaarRekenin
 
 	}
 	
+
 	@Override
 	public int hashCode() {
 		return super.hashCode();
 	}
 	
+	/**
+	 * adds constraint that obj is an instance of SpaarrekeningEntity.
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		return super.equals(obj) && obj instanceof SpaarrekeningEntity;
