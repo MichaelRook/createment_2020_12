@@ -32,6 +32,15 @@ public class SpaarrekeningEntity extends AbstractBankrekeningEntity<SpaarRekenin
 		super.stort(bedrag + CREDIT_RENTE * bedrag / 100.0);
 	}
 	
+	
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * Adds a fee for retrieving a bedrag from the current Spaarrekening, the fee is {@value #BOETE_RENTE} %
+	 * of the to be withdrawn bedrag.
+	 * 
+	 */
+	
 
 	@Override
 	public void neemOp(double bedrag) throws Exception {
@@ -42,6 +51,7 @@ public class SpaarrekeningEntity extends AbstractBankrekeningEntity<SpaarRekenin
 		}
 	}
 
+	
 	@Override
 	public void print() {
 		super.print();

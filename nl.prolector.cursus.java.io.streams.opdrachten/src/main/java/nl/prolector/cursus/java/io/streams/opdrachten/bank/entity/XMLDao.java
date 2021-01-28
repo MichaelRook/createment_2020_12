@@ -133,10 +133,10 @@ public class XMLDao implements BankDAO {
 			    AbstractBankrekeningEntity<?> aBankRekening;
 				switch (soort) {
 				case "spaarRekening":
-					aBankRekening = new SpaarrekeningFactory(houder, saldo, nummer);
+					aBankRekening = new SpaarrekeningEntity(houder, saldo, nummer);
 					break;
 				case "rekeningCourant":
-					aBankRekening = new RekeningCourantFactory(houder, saldo, nummer);
+					aBankRekening = new RekeningCourantEntity(houder, saldo, nummer);
 					break;
 
 				default:

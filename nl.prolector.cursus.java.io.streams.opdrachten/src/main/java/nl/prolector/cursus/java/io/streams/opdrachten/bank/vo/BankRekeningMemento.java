@@ -13,7 +13,13 @@ public abstract class BankRekeningMemento implements Serializable {
 	private final int rekeningnummer;
 	
 	
-	
+	/**
+	 * Creates a Memento object which can be used to set the state of a {@link AbstractBankRekeningEntity} object 
+	 * 
+	 * @param houder
+	 * @param saldo
+	 * @param rekeningnummer
+	 */
 	protected BankRekeningMemento(String houder, double saldo, int rekeningnummer) {
 		this.houder = houder;
 		this.saldo = saldo;
