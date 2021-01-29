@@ -14,7 +14,9 @@ public class BankEntity implements Serializable, Iterable<AbstractBankrekeningEn
 	 */
 	private static final long serialVersionUID = 1L;
 	private TreeMap<Integer, AbstractBankrekeningEntity<?>> rekeningen;
-	private final String naam;
+	private String naam;
+
+
 	public final static int EERSTE_REKENINGNR = 1000;
 	private transient int laatsteRekeningnr = BankEntity.EERSTE_REKENINGNR;
 
@@ -254,5 +256,7 @@ public class BankEntity implements Serializable, Iterable<AbstractBankrekeningEn
 		this.getNaam().compareTo(that.getNaam());
 		return value;
 	}
-
+	public void setNaam(String naam) {
+		this.naam = naam;
+	}
 }
